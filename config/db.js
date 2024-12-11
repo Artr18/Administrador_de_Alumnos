@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const MONGO_URI = 'mongodb+srv://er663699:uATEDqDy5yKFCsMd@cluster0.alhgo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+// Cambié la cadena de conexión para incluir el nombre de la base de datos 'Escuela'
+const MONGO_URI = 'mongodb+srv://er663699:uATEDqDy5yKFCsMd@cluster0.alhgo.mongodb.net/Escuela?retryWrites=true&w=majority';
 
 mongoose.connect(MONGO_URI)
     .then(() => {

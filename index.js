@@ -34,7 +34,7 @@ app.get('/alumnos/modificar', async(req, res) => {
     }
 });
 
-// Iniciar el servidor
+// Iniciar el servidor en el puerto proporcionado por Render
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, function() {
     console.log(`Servidor ejecutándose en el puerto ${PORT}`);
