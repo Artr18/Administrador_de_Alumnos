@@ -1,15 +1,11 @@
 const mongoose = require('mongoose');
 
-// Obtén la cadena de conexión desde la variable de entorno
-const MONGO_URI = process.env.MONGO_URI;
+const MONGO_URI = 'mongodb+srv://er663699:uaTEDqDy5yKFCsMd@cluster0.alhgo.mongodb.net/Escuela?retryWrites=true&w=majority';
 
-mongoose.connect(MONGO_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
+mongoose.connect(MONGO_URI)
     .then(() => {
-        console.log('Conectado a MongoDB Atlas');
+        console.log('Conectado a MongoDB');
     })
     .catch((error) => {
-        console.error('Error conectando a MongoDB Atlas:', error);
+        console.error('Error conectando a MongoDB:', error);
     });
