@@ -11,6 +11,10 @@ router.get('/alumnos', async(req, res) => {
         console.error('Error al obtener los alumnos:', error);
         res.status(500).send('Error en el servidor');
     }
+    // Añade esto al principio de tus rutas
+    router.get('/', (req, res) => {
+        res.redirect('/alumnos'); // Redirige a la página de alumnos
+    });
 });
 // Ruta para editar alumno (muestra el formulario)
 router.get('/alumnos/edit/:id', async(req, res) => {
