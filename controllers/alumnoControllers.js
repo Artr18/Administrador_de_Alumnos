@@ -3,6 +3,10 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Alumno = require('../models/Alumno');
 // Ruta para mostrar todos los alumnos
+// Añade esto al principio de tus rutas
+router.get('/', (req, res) => {
+    res.redirect('/alumnos'); // Redirige a la página de alumnos
+});
 router.get('/alumnos', async(req, res) => {
     try {
         const alumnos = await Alumno.find({});
@@ -11,10 +15,6 @@ router.get('/alumnos', async(req, res) => {
         console.error('Error al obtener los alumnos:', error);
         res.status(500).send('Error en el servidor');
     }
-    // Añade esto al principio de tus rutas
-    router.get('/', (req, res) => {
-        res.redirect('/alumnos'); // Redirige a la página de alumnos
-    });
 });
 // Ruta para editar alumno (muestra el formulario)
 router.get('/alumnos/edit/:id', async(req, res) => {
