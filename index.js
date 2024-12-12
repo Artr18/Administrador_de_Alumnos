@@ -28,6 +28,6 @@ app.get('/alumnos/modificar', async(req, res) => {
     }
 });
 // Iniciar el servidor
-app.listen(3000, function() {
+app.listen(10000, function() {
     console.log('Servidor ejecutándose en el puerto 3000');
 });
