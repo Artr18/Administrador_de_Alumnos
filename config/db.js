@@ -1,12 +1,10 @@
 const mongoose = require('mongoose');
-
-// Cambié la cadena de conexión para incluir el nombre de la base de datos 'Escuela'
-const MONGO_URI = 'mongodb+srv://er663699:uATEDqDy5yKFCsMd@cluster0.alhgo.mongodb.net/Escuela?retryWrites=true&w=majority';
+const MONGO_URI = 'mongodb://localhost:27017/Escuela';
 
 mongoose.connect(MONGO_URI)
     .then(() => {
-        console.log('Conectado a MongoDB');
+        console.log('Conectado a MongoBD');
     })
     .catch((error) => {
-        console.error('Error conectando a MongoDB:', error);
+        console.error('Error conectando a MongoBD:', error);
     });
