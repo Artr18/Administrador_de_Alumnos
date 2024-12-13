@@ -2,12 +2,10 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const Alumno = require('../models/Alumno');
-// Ruta para mostrar todos los alumnos
-// Añade esto al principio de tus rutas
-router.get('/', (req, res) => {
-    res.redirect('/alumnos'); // Redirige a la página de alumnos
-});
-router.get('/alumnos', async(req, res) => {
+const isAuthenticated = require('../middleware/isAuthenticated'); // Importa el middleware
+
+// Ruta para mostrar todos los alumnos (protegida)
+router.get('/alumnos', isAuthenticated, async(req, res) => {
     try {
         const alumnos = await Alumno.find({});
         res.render('index', { alumnos });
@@ -16,8 +14,9 @@ router.get('/alumnos', async(req, res) => {
         res.status(500).send('Error en el servidor');
     }
 });
-// Ruta para editar alumno (muestra el formulario)
-router.get('/alumnos/edit/:id', async(req, res) => {
+
+// Ruta para editar alumno (protegida)
+router.get('/alumnos/edit/:id', isAuthenticated, async(req, res) => {
     try {
         const alumno = await Alumno.findById(req.params.id);
         if (!alumno) {
@@ -29,8 +28,9 @@ router.get('/alumnos/edit/:id', async(req, res) => {
         res.status(500).send('Error del servidor');
     }
 });
-// Ruta para agregar un nuevo alumno
-router.post('/alumnos', async(req, res) => {
+
+// Ruta para agregar un nuevo alumno (protegida)
+router.post('/alumnos', isAuthenticated, async(req, res) => {
     try {
         const nuevoAlumno = new Alumno(req.body);
         await nuevoAlumno.save();
@@ -40,8 +40,9 @@ router.post('/alumnos', async(req, res) => {
         res.status(500).send('Error al agregar alumno');
     }
 });
-// Ruta para actualizar un alumno (por ID)
-router.put('/alumnos/:id', async(req, res) => {
+
+// Ruta para actualizar un alumno (protegida)
+router.put('/alumnos/:id', isAuthenticated, async(req, res) => {
     try {
         const alumnoActualizado = await Alumno.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!alumnoActualizado) {
@@ -53,8 +54,9 @@ router.put('/alumnos/:id', async(req, res) => {
         res.status(500).json({ error: 'Error al actualizar alumno' });
     }
 });
-// Ruta para eliminar un alumno (por NC o ID)
-router.delete('/alumnos/:identifier', async(req, res) => {
+
+// Ruta para eliminar un alumno (protegida)
+router.delete('/alumnos/:identifier', isAuthenticated, async(req, res) => {
     try {
         const identifier = req.params.identifier.trim();
         let alumnoEliminado;
@@ -67,11 +69,11 @@ router.delete('/alumnos/:identifier', async(req, res) => {
         if (!alumnoEliminado) {
             return res.status(404).json({ error: 'Alumno no encontrado' });
         }
-        // Redirigir a la lista de alumnos después de eliminar
         res.redirect('/alumnos?success=Alumno eliminado correctamente');
     } catch (error) {
         console.error('Error al eliminar alumno:', error);
         res.status(500).json({ error: 'Error de servidor', details: error.message });
     }
 });
+
 module.exports = router;

@@ -16,11 +16,18 @@
             </div>
             <% } %>
                 <h1>Lista de Alumnos</h1>
+
+                <!-- Botón para cerrar sesión en la esquina superior derecha -->
+                <div class="position-absolute top-0 end-0 p-3">
+                    <a href="/logout" class="btn btn-danger">Cerrar Sesión</a>
+                </div>
+
                 <!-- Botones para añadir y modificar alumnos -->
                 <div class="mb-3">
                     <a href="/alumnos/nuevo" class="btn btn-success">Añadir Alumno</a>
                     <a href="/alumnos/modificar" class="btn btn-primary">Modificar Alumnos</a>
                 </div>
+
                 <!-- Tabla de alumnos sin opciones de modificación -->
                 <h2>Listado de Alumnos</h2>
                 <table class="table table-striped">

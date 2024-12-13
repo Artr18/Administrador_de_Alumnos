@@ -1,3 +1,4 @@
+//Alumno.js
 const mongoose = require('mongoose');
 
 // Crear un esquema de su documento (tabla)
